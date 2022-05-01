@@ -8,29 +8,24 @@ function callback(counter) {
     return counter < 5;
 }
 
-/*
+
 function startTimer(callback, interval) {
-        let counter = 1;
         
-        let count_down = setInterval(()=>{
-            console.log(counter);
-            counter ++;}, interval);
-        
-        
-        setInterval(() => {
-            if (!(callback(counter))) {
-                clearInterval(count_down);
-            }
-        }, interval);
+    let counter = 0;
+    
+    let count_down = setInterval(()=>{
+        counter += 1;
+        console.log(counter);
+        if (!callback(counter)) {
+            clearInterval(count_down);
+        };
+    }, interval);
     
 }
-*/
-
-
 
 // while something 
 // set timeout (counter, interval * counter)
-
+/*
 function startTimer(callback, interval) {
     let counter = 1;
     while (callback(counter)) {
@@ -40,5 +35,6 @@ function startTimer(callback, interval) {
     }
     
 }
+*/
 
 startTimer(callback, 500);
