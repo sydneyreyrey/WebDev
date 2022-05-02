@@ -20,7 +20,6 @@ function sug_act() {
         like.setAttribute('id', 'lbt');
         like.textContent = 'Like';
         
-        
 
         let diDiv = document.createElement('div');
         let dislike = document.createElement('button');
@@ -29,9 +28,9 @@ function sug_act() {
         
         req.onload = function() {
             res_obj = JSON.parse(this.response);
+            console.log(res_obj);
             document.getElementById("Suggested Activity").innerHTML = res_obj.activity;
             like.addEventListener("click", Like);
-
         };
 
         req.open("GET", "https://www.boredapi.com/api/activity", true);
@@ -50,48 +49,42 @@ function sug_act() {
   
     }
 
-    
+
+    let info = ['activity', 'type', 'participants', 'price', 'accessibility'];
+    let tbl = document.createElement('table');
+    tbl.setAttribute('id', 'tbl');
+    let tblHead = document.createElement('th');
+    tbl.appendChild(tblHead);
     let tblstat = false;
+    info.forEach(element => {
+        let cell = document.createElement('td');
+        cell.setAttribute('id', 'cell');
+        console.log(element);
+        cell.textContent = element;
+        tblHead.appendChild(cell);
+    });
+
+    
 
     function Like() {
-        
-        
-        let tbl = document.createElement('table');
-        tbl.setAttribute('id', 'tbl');
-        //let tblBody = document.createElement('tbody');
-        //tbl.appendChild(tblBody);
-        let tblHead = document.createElement('th');
-        tbl.appendChild(tblHead);
-
-        let info = ['activity', 'type', 'participants', 'price', 'accesibility'];
-
-        
 
         if (!tblstat) {
-            let lktbl = document.getElementById('like_table');
-            lktbl.appendChild(tbl);
-            info.forEach(element => {
-                let cell = document.createElement('td');
-                cell.setAttribute('id', 'cell')
-                console.log(element)
-                cell.textContent = element;
-                tblHead.appendChild(cell);
-            });
+            let tbl_loc = document.getElementById('like_table');
+            tbl_loc.appendChild(tbl);
             tblstat = true;
         }
-
-        
 
         let row = document.createElement('tr');
         info.forEach(element => {
             let cell = document.createElement('td');
-            cell.setAttribute('id', 'cell')
+            cell.setAttribute('id', 'cell');
             cell.textContent = res_obj[element];
             row.appendChild(cell);
-
-            //row.appendChild()
+        
+        
         });
         tbl.appendChild(row);
+        buttonclickhandler();
     }
     
 
